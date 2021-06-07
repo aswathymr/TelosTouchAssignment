@@ -1,0 +1,5 @@
+#This space is used to define global environment variables
+url = https://classic.crmpro.com
+username = groupautomation
+password = Test@12345
+browser = chrome

@@ -1,0 +1,5 @@
+package co.crm.qa.util;
+
+public class Constants {
+
+}

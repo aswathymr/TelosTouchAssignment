@@ -1,0 +1,90 @@
+package co.crm.qa.util;
+
+import java.io.FileInputStream;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import com.crm.qa.base.TestBase;
+
+/*ProjectName: Classic CRM Application Framework
+ * Description: TestUtil class contains common functions which can be commonly used across the entire framework
+ * Created By:Aswathy
+ * Date of Creation: 06-June-2021
+ * Version: V1.1
+ */
+
+public class TestUtil extends TestBase {
+	
+	public static long pageLoadTimeout = 20;
+	public static long implicitWait = 20;
+	
+	public static String currDirectory = System.getProperty("user.dir");
+	public static String subPath = currDirectory+"\\src\\main\\java\\com\\crm\\qa";
+	public static String configPath = subPath+"\\config\\config.properties";
+	public static String testDataSheetPATH = subPath+"\\testdata\\ClassCRMTestData.xls";
+	
+	public static String driverPath = currDirectory+"\\libraries\\";
+	
+	static Workbook book;
+	static Sheet sheet;
+	
+	
+	public void switchToFrame() {
+		try {
+			driver.switchTo().frame("mainpanel");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void clickUsingJSE(WebElement newContactLink) {
+		try
+		{
+	    	JavascriptExecutor js = (JavascriptExecutor)driver;
+	    	js.executeScript("arguments[0].click();", newContactLink);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static Object[][] getTestData(String sheetName) {
+		FileInputStream file = null;
+		try {
+			file = new FileInputStream(testDataSheetPATH);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			book = WorkbookFactory.create(file);
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		sheet = book.getSheet(sheetName);
+		Object[][] data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
+		// System.out.println(sheet.getLastRowNum() + "--------" +
+		// sheet.getRow(0).getLastCellNum());
+		for (int i = 0; i < sheet.getLastRowNum(); i++) {
+			for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
+				data[i][k] = sheet.getRow(i + 1).getCell(k).toString();
+				// System.out.println(data[i][k]);
+			}
+		}
+		return data;
+	}
+
+}

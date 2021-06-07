@@ -1,0 +1,14 @@
+package com.crm.qa.base;
+
+public class TestBase {
+	
+	/*
+	 * TestBase Class Constructor : used to initialize the Properties object to 
+	 * fetch config(global
+	 */
+	public TestBase(){
+		
+		
+	}
+
+}

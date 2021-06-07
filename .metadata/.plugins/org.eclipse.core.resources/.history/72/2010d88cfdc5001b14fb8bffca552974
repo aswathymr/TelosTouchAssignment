@@ -1,0 +1,29 @@
+package com.crm.qa.testcases;
+
+import com.crm.qa.base.TestBase;
+import com.crm.qa.pages.LoginPage;
+//import org.testng.annotations.*;
+
+public class LoginPageTest extends TestBase {
+	LoginPage loginpage;
+	
+	public LoginPageTest() {
+		super();
+	}
+
+	@BeforeMethod
+	public void setUp() {
+		initialization();
+		loginpage = new LoginPage();
+		
+	}
+	
+	@Test
+	
+	
+	@AfterMethod
+	public void tearDown() {
+		
+	}
+	
+}

@@ -1,0 +1,17 @@
+package co.crm.qa.util;
+
+import com.crm.qa.base.TestBase;
+
+public class Constants extends TestBase{
+	
+	public static long pageLoadTimeout = 20;
+	public static long implicitWait = 20;
+	
+	public static String currDirectory = System.getProperty("user.dir");
+	public static String subPath = currDirectory+"\\src\\main\\java\\com\\crm\\qa";
+	public static String configPath = subPath+"\\config\\config.properties";
+	public static String testDataSheetPATH = subPath+"\\testdata\\ClassCRMTestData.xls";
+	
+	public static String driverPath = currDirectory+"\\libraries\\";
+
+}

@@ -1,0 +1,43 @@
+package com.crm.qa.testcases;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
+import com.crm.qa.base.TestBase;
+import com.crm.qa.pages.ContactsPage;
+import com.crm.qa.pages.HomePage;
+import com.crm.qa.pages.LoginPage;
+
+import co.crm.qa.util.TestUtil;
+
+public class ContactPageTest  extends TestBase{
+	LoginPage loginPage;
+	HomePage homePage;
+	TestUtil testUtil;
+	ContactsPage contactsPage;
+	
+	public ContactPageTest() {
+		super();
+	}
+
+	
+	@BeforeMethod
+	public void setUp() {
+		initialization();
+		testUtil = new TestUtil();
+		contactsPage = new ContactsPage();
+		loginPage = new LoginPage();
+		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		
+	}
+	
+	
+	
+	
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
+	}
+
+
+}

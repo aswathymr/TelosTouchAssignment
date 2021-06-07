@@ -1,0 +1,45 @@
+package com.crm.qa.base;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class TestBase {
+	
+		static WebDriver driver;
+		static Properties prop;
+	
+	/*
+	 * TestBase Class Constructor : used to initialize the Properties object to 
+	 * fetch config(env) variables from config.properties file
+	 */
+	public TestBase(){
+		try {
+			prop = new Properties();
+			FileInputStream ip = new FileInputStream("/Users/aswat/TelosTouchAssignment/FreeCRMTest/src/main/java/com/crm/qa/config/config.properties");
+			prop.load(ip);
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void initialization() {
+		String browserName = prop.getProperty("browser");
+		if(browserName.equals("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "resources//chromedriver.exe");
+		}
+		else if(browserName.equals("FF")){
+			System.setProperty("webdriver.gecko.driver", "/Users/naveenkhunteta/Documents/SeleniumServer/geckodriver");	
+			driver = new FirefoxDriver(); 
+		}
+	}
+
+}
